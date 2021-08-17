@@ -1,0 +1,219 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://theme/GuiScrollArrowRight.svg" type="Texture" id=2]
+[ext_resource path="res://music/music.gd" type="Script" id=3]
+[ext_resource path="res://browser/game_list.gd" type="Script" id=4]
+[ext_resource path="res://browser/game_info.gd" type="Script" id=5]
+[ext_resource path="res://theme/GuiScrollArrowLeft.svg" type="Texture" id=6]
+[ext_resource path="res://browser/about.tscn" type="PackedScene" id=7]
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+split_offset = 120
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSplitContainer" type="VSplitContainer" parent="HSplitContainer"]
+margin_right = 370.0
+margin_bottom = 680.0
+rect_min_size = Vector2( 250, 0 )
+dragger_visibility = 1
+
+[node name="SearchBar" type="LineEdit" parent="HSplitContainer/VSplitContainer"]
+margin_right = 370.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+placeholder_text = "Search"
+
+[node name="Scroll" type="ScrollContainer" parent="HSplitContainer/VSplitContainer"]
+margin_top = 40.0
+margin_right = 370.0
+margin_bottom = 680.0
+rect_min_size = Vector2( 100, 100 )
+scroll_horizontal_enabled = false
+
+[node name="GameList" type="VBoxContainer" parent="HSplitContainer/VSplitContainer/Scroll"]
+margin_right = 370.0
+margin_bottom = 640.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+
+[node name="GameInfo" type="VBoxContainer" parent="HSplitContainer"]
+margin_left = 378.0
+margin_right = 1240.0
+margin_bottom = 680.0
+rect_min_size = Vector2( 300, 200 )
+script = ExtResource( 5 )
+
+[node name="Name" type="Control" parent="HSplitContainer/GameInfo"]
+margin_right = 862.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Name" type="Label" parent="HSplitContainer/GameInfo/Name"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -84.0
+margin_bottom = -5.0
+size_flags_horizontal = 3
+text = "Name"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="About" parent="HSplitContainer/GameInfo/Name" instance=ExtResource( 7 )]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = 4.0
+margin_right = 0.0
+margin_bottom = -4.0
+focus_neighbour_left = NodePath("../../Screenshots/Prev")
+focus_neighbour_bottom = NodePath("../../Screenshots/Next")
+
+[node name="Screenshots" type="HBoxContainer" parent="HSplitContainer/GameInfo"]
+margin_top = 36.0
+margin_right = 862.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_vertical = 3
+
+[node name="Prev" type="Button" parent="HSplitContainer/GameInfo/Screenshots"]
+margin_right = 28.0
+margin_bottom = 476.0
+rect_min_size = Vector2( 20, 0 )
+focus_neighbour_top = NodePath("../../Name/About")
+focus_neighbour_right = NodePath("../Next")
+focus_neighbour_bottom = NodePath("../../Buttons/Play")
+icon = ExtResource( 6 )
+
+[node name="Screenshot" type="TextureRect" parent="HSplitContainer/GameInfo/Screenshots"]
+margin_left = 32.0
+margin_right = 830.0
+margin_bottom = 476.0
+size_flags_horizontal = 3
+expand = true
+stretch_mode = 6
+
+[node name="Next" type="Button" parent="HSplitContainer/GameInfo/Screenshots"]
+margin_left = 834.0
+margin_right = 862.0
+margin_bottom = 476.0
+rect_min_size = Vector2( 20, 0 )
+focus_neighbour_left = NodePath("../Prev")
+focus_neighbour_top = NodePath("../../Name/About")
+focus_neighbour_bottom = NodePath("../../Buttons/GitHub")
+icon = ExtResource( 2 )
+
+[node name="Description" type="Panel" parent="HSplitContainer/GameInfo"]
+margin_top = 516.0
+margin_right = 862.0
+margin_bottom = 616.0
+rect_min_size = Vector2( 0, 100 )
+rect_clip_content = true
+
+[node name="Scroll" type="ScrollContainer" parent="HSplitContainer/GameInfo/Description"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HSplitContainer/GameInfo/Description/Scroll"]
+margin_top = 39.0
+margin_right = 862.0
+margin_bottom = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Description"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="HBoxContainer" parent="HSplitContainer/GameInfo"]
+margin_top = 620.0
+margin_right = 862.0
+margin_bottom = 680.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="Play" type="Button" parent="HSplitContainer/GameInfo/Buttons"]
+margin_right = 212.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 80, 60 )
+focus_neighbour_top = NodePath("../../Screenshots/Prev")
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HSplitContainer/GameInfo/Buttons/Play"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -8.0
+text = "Play Demo"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Edit" type="Button" parent="HSplitContainer/GameInfo/Buttons"]
+margin_left = 216.0
+margin_right = 429.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+focus_neighbour_top = NodePath("../../Screenshots/Prev")
+size_flags_horizontal = 3
+text = "Edit Demo"
+
+[node name="AssetLib" type="Button" parent="HSplitContainer/GameInfo/Buttons"]
+margin_left = 433.0
+margin_right = 645.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+focus_neighbour_top = NodePath("../../Screenshots/Next")
+size_flags_horizontal = 3
+text = "View on Asset Library"
+
+[node name="GitHub" type="Button" parent="HSplitContainer/GameInfo/Buttons"]
+margin_left = 649.0
+margin_right = 862.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+focus_neighbour_top = NodePath("../../Screenshots/Next")
+size_flags_horizontal = 3
+text = "View on GitHub"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+script = ExtResource( 3 )
+
+[connection signal="text_changed" from="HSplitContainer/VSplitContainer/SearchBar" to="HSplitContainer/VSplitContainer/Scroll/GameList" method="_on_SearchBar_text_changed"]
+[connection signal="pressed" from="HSplitContainer/GameInfo/Screenshots/Prev" to="HSplitContainer/GameInfo" method="_on_Prev_pressed"]
+[connection signal="pressed" from="HSplitContainer/GameInfo/Screenshots/Next" to="HSplitContainer/GameInfo" method="_on_Next_pressed"]
+[connection signal="pressed" from="HSplitContainer/GameInfo/Buttons/Play" to="HSplitContainer/GameInfo" method="_on_Play_pressed"]
+[connection signal="pressed" from="HSplitContainer/GameInfo/Buttons/Edit" to="HSplitContainer/GameInfo" method="_on_Edit_pressed"]
+[connection signal="pressed" from="HSplitContainer/GameInfo/Buttons/AssetLib" to="HSplitContainer/GameInfo" method="_on_AssetLib_pressed"]
+[connection signal="pressed" from="HSplitContainer/GameInfo/Buttons/GitHub" to="HSplitContainer/GameInfo" method="_on_GitHub_pressed"]
+[connection signal="finished" from="Music" to="Music" method="play_next"]
