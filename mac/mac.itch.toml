@@ -1,0 +1,4 @@
+[[actions]]
+platform = "osx"
+name = "play"
+path = "run-mac.sh"
