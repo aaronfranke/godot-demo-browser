@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://theme/theme.tres" type="Theme" id=1]
 [ext_resource path="res://theme/GuiScrollArrowRight.svg" type="Texture" id=2]
@@ -7,14 +7,11 @@
 [ext_resource path="res://browser/game_info.gd" type="Script" id=5]
 [ext_resource path="res://theme/GuiScrollArrowLeft.svg" type="Texture" id=6]
 [ext_resource path="res://browser/about.tscn" type="PackedScene" id=7]
+[ext_resource path="res://browser/loading_rect.gd" type="Script" id=8]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = -20.0
 theme = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -23,6 +20,10 @@ __meta__ = {
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
 split_offset = 120
 __meta__ = {
 "_edit_use_anchors_": false
@@ -203,6 +204,26 @@ rect_min_size = Vector2( 60, 60 )
 focus_neighbour_top = NodePath("../../Screenshots/Next")
 size_flags_horizontal = 3
 text = "View on GitHub"
+
+[node name="LoadingRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.501961 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="LoadingRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Loading"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 volume_db = -20.0
